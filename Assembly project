@@ -1,0 +1,115 @@
+.model small
+.data
+x dw ?
+y dw ?
+msg1 db "enter the first number: $" 
+ln db 0ah,0dh ,"$"
+msg2 db "enter the second number :  $" 
+msg3 db "The Addition is: $"
+msg4 db "The subtraction is : $" 
+msg5 db "The Multiplication is : $"
+msg6 db "The Division is : $"
+
+.code
+main proc far
+mov ax,@data
+mov Ds ,ax
+     
+lea dx,msg1     ;accept the first number
+mov ah,9h
+int 21h
+mov ah,1h
+int 21h
+mov x,ax
+sub x,30h
+                 
+lea dx ,ln      ;new line
+mov ah ,9h
+int 21h 
+        
+lea dx,msg2     ;accept the second number
+mov ah,9h
+int 21h
+mov ah,1h
+int 21h
+mov y,ax
+sub y,30h
+sub ax,30h
+
+lea dx ,ln      ;new line
+mov ah ,9h          
+int 21h 
+
+     
+lea dx,msg3     ;print msg3 
+mov ah,9h
+int 21h
+         
+mov ax,x        ;addition
+MOV bx,y        
+ADD Ax,y
+mov dx,ax           
+add dx,30h 
+mov ah,2h
+int 21h 
+        
+lea dx ,ln      ;new line
+mov ah ,9h
+int 21h
+
+     
+lea dx,msg4     ;print msg4 
+mov ah,9h
+int 21h  
+        
+MOV Ax, x       ;subbation
+mov bx,y          
+SUB Ax, y
+mov dx,ax
+add dx,30h
+mov ah,2h
+int 21h  
+
+
+
+lea dx ,ln      ;new line
+mov ah ,9h
+int 21h 
+
+     
+lea dx,msg5     ;print msg5  
+mov ah,9h
+int 21h
+
+mov ax ,x       ;multiplication
+mov bx ,y 
+mul bx  
+mov dx,ax  
+add dx,30h 
+mov ah,2h
+int 21h
+      
+lea dx ,ln      ;new line
+mov ah ,9h
+int 21h 
+
+     
+lea dx,msg6    ;print msg6    
+mov ah,9h
+int 21h
+
+
+mov dx,0
+mov ax,x    ;divisn
+mov bx ,y 
+div y  
+mov dl,al
+add dl ,30h  
+mov ah,02h
+int 21h     
+        
+code ends
+end main          
+
+
+
